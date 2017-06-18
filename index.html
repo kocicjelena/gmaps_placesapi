@@ -43,7 +43,7 @@
         font-family: Arial, Helvetica, sans-serif;
         position: absolute;
         right: 5%;
-        top: 30%;
+        top: 31%;
         margin-top: 30%;
         height: 73%;
         width: 80%;
@@ -65,7 +65,7 @@
       }
       li {
         background-color: #f1f1f1;
-        padding: 10%;
+        padding: 5%;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -87,7 +87,7 @@
         font-family: Arial, Helvetica, sans-serif;
         position: absolute;
         right: 1%;
-        top: 40%;
+        top: 45%;
         }
   body {
     padding-right: 0%;
@@ -139,11 +139,7 @@
           zoom: 17
         });
 		var service = new google.maps.places.PlacesService(map);
-		//var atm = {
-         ////     lat: position.coords.latitude,
-         //     lng: position.coords.longitude
-         //   };
-        service.nearbySearch({
+		service.nearbySearch({
 		
           location: pos,
 		  name: 'Telenor Bank ATM',
@@ -157,14 +153,14 @@
           createMarkers(results);
 
           if (pagination.hasNextPage) {
-            var moreButton = document.getElementById('more');
+           // var moreButton = document.getElementById('more');
 
-            moreButton.disabled = false;
+            //moreButton.disabled = true;
 
-            moreButton.addEventListener('click', function() {
-              moreButton.disabled = true;
-              pagination.nextPage();
-            });
+           // moreButton.addEventListener('click', function() {
+            //  moreButton.disabled = true;
+            //  pagination.nextPage();
+            //});
           }
         }
       }
@@ -173,7 +169,7 @@
 ////index.html:166 7.1 km
 //index.html:166 1 m
 //index.html:155 Object {rows: Array(2), originAddresses: Array(2), destinationAddresses: Array(2)} 
-      redjanje = new Array();
+      var redjanje = new Array();
 	  function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
         var placesList = document.getElementById('places');
@@ -185,8 +181,9 @@
               lng: position.coords.longitude
             };})
 		var origin1 = pos;
-		var origin2 = place.geometry.location;
-		var destinationA = pos;
+		var origin2 = pos;
+		//var origin2 = place.geometry.location;
+		var destinationA = place.geometry.location;
 		var destinationB = place.geometry.location;
 		 var geocoder = new google.maps.Geocoder;
 		var service = new google.maps.DistanceMatrixService();
@@ -202,33 +199,70 @@
 
 		function callback(response, status) {
 		console.log(response, status);
+		
 		var originList = response.originAddresses;
 		////var outputDiv = document.getElementById('output');
 		//			outputDiv.innerHTML = 'distance';
             //deleteMarkers(markersArray);
 	var destinationList = response.destinationAddresses;
-	
-			  for (var k = 0; k < originList.length; k++) {
+	var k = 0;
+			  for (var k = 0; k < destinationList.length; k++) {
 				  var results = response.rows[k].elements;
 				 // geocoder.geocode({'address': originList[k]},
 				  //    showGeocodedAddressOnMap(false));
 				  for (var j = 0; j < results.length; j++) {
 				  console.log(results[j].distance.text);
+				  var re = results[j].distance.text;
+				  console.log(re.slice(0, re.length-2));
+				  //redjanje.push(results[j].distance.text);
+				  var red = redjanje.slice(0, 10);
+					//red.sort();
+				 // placesList.innerHTML += '<li><div id="mapi"><div>' + 'place.name' + '<img src="https://maps.googleapis.com/maps/api/staticmap?center=' + pos + '&zoom=13&scale=1&size=150x150&maptype=roadmap&format=png&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="map" />' + results[j].distance.text +'</li>';
+//if (redjanje[j]===0)
+// {return;}else{console.log(red[j], 'red');
+				 placesList.innerHTML += '<li><div id="mapi"><div>' +places[j].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + results[j].distance.text +'</li>';
+				 }
+				 //if (results[j].distance.text != results[k].distance.text) 
+				 redjanje.push(re.slice(0, re.length-2));
+				  redjanje.sort();
+				  
+					//var udal = results[j].distance.value;
+					//udal.slice(0, udal.length -2);
+					console.log(redjanje.sort());
+					console.log(re, 're');
+					console.log(red, 'red');
+					console.log(red.slice(0, red.length -2));
+				 }
+				 //'<img width="600" src="https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap&markers=size:mid%7Ccolor:red%7CSan+Francisco,CA%7COakland,CA%7CSan+Jose,CA&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU">'
+				 //<img src="https://maps.googleapis.com/maps/api/staticmap?center=Dimitrija Tucovića 66, Beograd, Serbia&zoom=7&scale=1&size=150x150&maptype=roadmap&format=png&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="map" />
+//}
 				   // geocoder.geocode({'address': destinationList[j]},
 					//    showGeocodedAddressOnMap(true));
 					//outputDiv.innerHTML += originList[k] + ' to ' + destinationList[j] +
 					//	': ' + results[j].distance.text + ' in ' +
 					//	results[j].duration.text + '<br>';
 					//if (results[j].distance.text>results[j-1].distance.text)
-					redjanje.push(results[j].distance.text);
 					
 					//outputDiv.innerHTML = results[j].distance.text
-				  }
-				}
+				  
+				 // for (var g=0; g<11; g++){console.log('redjanje', redjanje[g]);}
+				//}
+				//var sortButton = document.getElementById('sort');
+
+            //moreButton.disabled = true;
+
+          // sortButton.addEventListener('click', function() {
+          //sortButton.disabled = true;
+       //pagination.nextPage();
+	   //redjanje.sort();
+    //document.getElementById("sort").innerHTML = redjanje;
+        //   });
+				
 	  // See Parsing the Results for
 	  // the basics of a callback function.
 	}
-redjanje.sort();
+
+
 			  var image = {
             url: place.icon,
             size: new google.maps.Size(51, 51),
@@ -248,7 +282,6 @@ redjanje.sort();
 		  var l =place.geometry.location.lat;
 		  var ln = place.geometry.location.lng;
 		//  for (var m; m<11; m++){
-          placesList.innerHTML += '<li><div id="mapi"><div>' + place.name + '<img src="https://maps.googleapis.com/maps/api/staticmap?center=' + pos + '&zoom=13&scale=1&size=150x150&maptype=roadmap&format=png&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="map" />' + redjanje[i]+'</li>';
 //}
           bounds.extend(place.geometry.location);
         }
@@ -310,10 +343,12 @@ redjanje.sort();
   <body>
 
     <div id="map"></div>
+	
     <div id="right-panel">
      <ul id="places"></ul>
       <!-- <h2></h2><button id="more">More results</button>-->
     </div>
+	<div id="sort">Sort</div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU&libraries=places,visualization&callback=initMap" async defer></script>
   </body>
 </html>
