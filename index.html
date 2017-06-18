@@ -246,8 +246,9 @@
 				 // placesList.innerHTML += '<li><div id="mapi"><div>' + 'place.name' + '<img src="https://maps.googleapis.com/maps/api/staticmap?center=' + pos + '&zoom=13&scale=1&size=150x150&maptype=roadmap&format=png&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="map" />' + results[j].distance.text +'</li>';
 //if (redjanje[j]===0)
 // {return;}else{console.log(red[j], 'red');
-if(j===k&results[j].distance.text.slice(0, re.length-2)!=redjanje[j])
-				 {placesList.innerHTML += '<li><div id="mapi"><div>' +places[j].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + results[j].distance.text +'</li>';}
+//if(j===k&results[j].distance.text.slice(0, re.length-2)!=redjanje[j])
+				 placesList.innerHTML += '<li><div id="mapi"><div>' +places[j].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + results[j].distance.text +'</li>';
+				 
 				 }
 				 //if (results[j].distance.text != results[k].distance.text) 
 				 redjanje.push(re.slice(0, re.length-2));
