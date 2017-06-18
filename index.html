@@ -138,6 +138,10 @@
           center: pos,
           zoom: 17
         });
+		  infoWindow.setPosition(pos);
+            infoWindow.setContent('I am here');
+            infoWindow.open(map);
+            map.setCenter(pos);
 		var service = new google.maps.places.PlacesService(map);
 		service.nearbySearch({
 		
@@ -157,9 +161,7 @@
           }
         }
       }
-	var redjanje = new Array();
-	var pored = new Array();
-		  var red = new Array();
+ var redjanje = new Array();
 	  function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
         var placesList = document.getElementById('places');
@@ -170,8 +172,21 @@
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };})
-	
+			 var image = {
+            url: place.icon,
+            size: new google.maps.Size(51, 51),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)
+          };
 
+          var marker = new google.maps.Marker({
+            map: map,
+            icon: image,
+            title: place.name,
+            position: place.geometry.location
+          });
+          
 		var origin1 = pos;
 		//var origin2 = place.geometry.location;
 		var destinationA = place.geometry.location;
@@ -191,77 +206,48 @@
 		console.log(response, status);
 		
 		var originList = response.originAddresses;
-		var destinationList = response.destinationAddresses;
+	var destinationList = response.destinationAddresses;
 	var k = 0;
 			  for (var k = 0; k < destinationList.length; k++) {
 				  var results = response.rows[k].elements;
-				 for (var j = 0; j < results.length; j++) {
+				  for (var j = 0; j < results.length; j++) {
 				  console.log(results[j].distance.text);
 				  var re = results[j].distance.text;
 				  console.log(re.slice(0, re.length-2));
 				  //redjanje.push(results[j].distance.text);
-				  redjanje.push(re.slice(0, re.length-2));
-				  var pored = redjanje.sort().slice();
-				  var poredjani = redjanje.sort();
-				  var red = poredjani.slice(1, 11);
-				 if((results[j].distance.text.slice(0, re.length-2)!=red[j])&&(j=k))
-				 {
-				// placesList.innerHTML += '<li><div id="mapi"><div>' +places[j].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + red[j] + 'km</li>';
+				  var red = redjanje.slice(1, 11);
+					//red.sort();
+				 placesList.innerHTML += '<li><div id="mapi"><div>' +places[j].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + results[j].distance.text +'</li>';
 				 }
-				 }
-				
-				//results[j].distance.text + 
+				 //if (results[j].distance.text != results[k].distance.text) 
+				 redjanje.push(re.slice(0, re.length-2));
+				  redjanje.sort();
 				  
+					//var udal = results[j].distance.value;
+					//udal.slice(0, udal.length -2);
 					console.log(redjanje.sort());
-						 
 					console.log(re, 're');
 					console.log(red, 'red');
-					for(var d=0;d<11;d++){
-					if(d=k)
-					{placesList.innerHTML += '<li>' +places[d].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + red[d] + '</li>';}
-					console.log(red, red.slice(10,1));
-					}
 					console.log(red.slice(0, red.length -2));
-					
 				 }
 				 
-				  
 	}
 
 
-			  var image = {
-            url: place.icon,
-            size: new google.maps.Size(51, 51),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-          };
-
-          var marker = new google.maps.Marker({
-            map: map,
-            icon: image,
-            title: place.name,
-            position: place.geometry.location
-          });
-          
-		  bounds.extend(place.geometry.location);
+			
+          bounds.extend(place.geometry.location);
         }
         map.fitBounds(bounds);
       }
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('I am here');
-            infoWindow.open(map);
-            map.setCenter(pos);
+          
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
         } 
-        
+       
       }
 		
-
-	  
-	   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
