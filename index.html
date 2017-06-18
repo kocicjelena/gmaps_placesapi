@@ -157,7 +157,13 @@
           }
         }
       }
+	  
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('I am here');
+            infoWindow.open(map);
+            map.setCenter(pos);
       var redjanje = new Array();
+	  var red = new Array();
 	  function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
         var placesList = document.getElementById('places');
@@ -233,10 +239,6 @@ bounds.extend(place.geometry.location);
         }
         map.fitBounds(bounds);
       }
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('I am here');
-            infoWindow.open(map);
-            map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -244,10 +246,7 @@ bounds.extend(place.geometry.location);
        
       }
 		
-
-
-	
-	   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
