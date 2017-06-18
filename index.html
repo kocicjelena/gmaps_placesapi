@@ -138,6 +138,10 @@
           center: pos,
           zoom: 17
         });
+		  infoWindow.setPosition(pos);
+            infoWindow.setContent('I am here');
+            infoWindow.open(map);
+            map.setCenter(pos);
 		var service = new google.maps.places.PlacesService(map);
 		service.nearbySearch({
 		
@@ -153,17 +157,11 @@
           createMarkers(results);
 
           if (pagination.hasNextPage) {
-        
+         
           }
         }
       }
-	  
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('I am here');
-            infoWindow.open(map);
-            map.setCenter(pos);
-      var redjanje = new Array();
-	  var red = new Array();
+ var redjanje = new Array();
 	  function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
         var placesList = document.getElementById('places');
@@ -188,17 +186,16 @@
             title: place.name,
             position: place.geometry.location
           });
+          
 		var origin1 = pos;
-		//var origin2 = pos;
 		//var origin2 = place.geometry.location;
 		var destinationA = place.geometry.location;
-		//var destinationB = place.geometry.location;
 		 var geocoder = new google.maps.Geocoder;
 		var service = new google.maps.DistanceMatrixService();
 		service.getDistanceMatrix(
 		  {
-			origins: [origin1, origin2],
-			destinations: [destinationA, destinationB],
+			origins: [origin1],
+			destinations: [destinationA],
 			travelMode: 'DRIVING',
 			unitSystem: google.maps.UnitSystem.METRIC,
 				  avoidHighways: false,
@@ -209,7 +206,7 @@
 		console.log(response, status);
 		
 		var originList = response.originAddresses;
-		var destinationList = response.destinationAddresses;
+	var destinationList = response.destinationAddresses;
 	var k = 0;
 			  for (var k = 0; k < destinationList.length; k++) {
 				  var results = response.rows[k].elements;
@@ -218,27 +215,31 @@
 				  var re = results[j].distance.text;
 				  console.log(re.slice(0, re.length-2));
 				  //redjanje.push(results[j].distance.text);
-				  var red = redjanje.slice(0, 10);
+				  var red = redjanje.slice(1, 11);
 					//red.sort();
-				 // placesList.innerHTML += '<li><div id="mapi"><div>' + 'place.name' + '<img src="https://maps.googleapis.com/maps/api/staticmap?center=' + pos + '&zoom=13&scale=1&size=150x150&maptype=roadmap&format=png&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="map" />' + results[j].distance.text +'</li>';
-//if (redjanje[j]===0)
-// {return;}else{console.log(red[j], 'red');
 				 placesList.innerHTML += '<li><div id="mapi"><div>' +places[j].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + results[j].distance.text +'</li>';
 				 }
 				 //if (results[j].distance.text != results[k].distance.text) 
 				 redjanje.push(re.slice(0, re.length-2));
 				  redjanje.sort();
-				  console.log(redjanje.sort());
+				  
+					//var udal = results[j].distance.value;
+					//udal.slice(0, udal.length -2);
+					console.log(redjanje.sort());
 					console.log(re, 're');
 					console.log(red, 'red');
 					console.log(red.slice(0, red.length -2));
 				 }
-				
+				 
 	}
-bounds.extend(place.geometry.location);
+
+
+			
+          bounds.extend(place.geometry.location);
         }
         map.fitBounds(bounds);
       }
+          
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
