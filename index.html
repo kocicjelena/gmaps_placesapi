@@ -153,12 +153,23 @@
           createMarkers(results);
 
           if (pagination.hasNextPage) {
-         
+           // var moreButton = document.getElementById('more');
+
+            //moreButton.disabled = true;
+
+           // moreButton.addEventListener('click', function() {
+            //  moreButton.disabled = true;
+            //  pagination.nextPage();
+            //});
           }
         }
       }
-	var redjanje = new Array();
-	var pored = new Array();
+//1 m
+//index.html:166 7.3 km
+////index.html:166 7.1 km
+//index.html:166 1 m
+//index.html:155 Object {rows: Array(2), originAddresses: Array(2), destinationAddresses: Array(2)} 
+      var redjanje = new Array();
 	  function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
         var placesList = document.getElementById('places');
@@ -216,41 +227,66 @@
 		console.log(response, status);
 		
 		var originList = response.originAddresses;
-		var destinationList = response.destinationAddresses;
+		////var outputDiv = document.getElementById('output');
+		//			outputDiv.innerHTML = 'distance';
+            //deleteMarkers(markersArray);
+	var destinationList = response.destinationAddresses;
 	var k = 0;
 			  for (var k = 0; k < destinationList.length; k++) {
 				  var results = response.rows[k].elements;
-				 for (var j = 0; j < results.length; j++) {
+				 // geocoder.geocode({'address': originList[k]},
+				  //    showGeocodedAddressOnMap(false));
+				  for (var j = 0; j < results.length; j++) {
 				  console.log(results[j].distance.text);
 				  var re = results[j].distance.text;
 				  console.log(re.slice(0, re.length-2));
 				  //redjanje.push(results[j].distance.text);
-				  redjanje.push(re.slice(0, re.length-2));
-				  var pored = redjanje.sort().slice();
-				  var poredjani = redjanje.sort();
-				  var red = poredjani.slice(1, 11);
-				 if((results[j].distance.text.slice(0, re.length-2)!=red[j])&&(j=k))
-				 {
-				// placesList.innerHTML += '<li><div id="mapi"><div>' +places[j].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + red[j] + 'km</li>';
+				  var red = redjanje.slice(0, 10);
+					//red.sort();
+				 // placesList.innerHTML += '<li><div id="mapi"><div>' + 'place.name' + '<img src="https://maps.googleapis.com/maps/api/staticmap?center=' + pos + '&zoom=13&scale=1&size=150x150&maptype=roadmap&format=png&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="map" />' + results[j].distance.text +'</li>';
+//if (redjanje[j]===0)
+// {return;}else{console.log(red[j], 'red');
+if(j===k&results[j].distance.text.slice(0, re.length-2)!=redjanje[j])
+				 {placesList.innerHTML += '<li><div id="mapi"><div>' +places[j].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + results[j].distance.text +'</li>';}
 				 }
-				 }
-				
-				//results[j].distance.text + 
+				 //if (results[j].distance.text != results[k].distance.text) 
+				 redjanje.push(re.slice(0, re.length-2));
+				  redjanje.sort();
 				  
+					//var udal = results[j].distance.value;
+					//udal.slice(0, udal.length -2);
 					console.log(redjanje.sort());
-						 
 					console.log(re, 're');
 					console.log(red, 'red');
-					for(var d=0;d<11;d++){
-					if(d=k)
-					{placesList.innerHTML += '<li>' +places[d].name+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=600x300&maptype=roadmap&format=jpg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CBelgrade,+Serbia" alt="Google Map of Belgrade, Serbia">' + red[d] + '</li>';}
-					console.log(red, red.slice(10,1));
-					}
 					console.log(red.slice(0, red.length -2));
-					
 				 }
-				 
+				 //'<img width="600" src="https://maps.googleapis.com/maps/api/staticmap?size=512x512&maptype=roadmap&markers=size:mid%7Ccolor:red%7CSan+Francisco,CA%7COakland,CA%7CSan+Jose,CA&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU">'
+				 //<img src="https://maps.googleapis.com/maps/api/staticmap?center=Dimitrija Tucovića 66, Beograd, Serbia&zoom=7&scale=1&size=150x150&maptype=roadmap&format=png&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="map" />
+//}
+				   // geocoder.geocode({'address': destinationList[j]},
+					//    showGeocodedAddressOnMap(true));
+					//outputDiv.innerHTML += originList[k] + ' to ' + destinationList[j] +
+					//	': ' + results[j].distance.text + ' in ' +
+					//	results[j].duration.text + '<br>';
+					//if (results[j].distance.text>results[j-1].distance.text)
+					
+					//outputDiv.innerHTML = results[j].distance.text
 				  
+				 // for (var g=0; g<11; g++){console.log('redjanje', redjanje[g]);}
+				//}
+				//var sortButton = document.getElementById('sort');
+
+            //moreButton.disabled = true;
+
+          // sortButton.addEventListener('click', function() {
+          //sortButton.disabled = true;
+       //pagination.nextPage();
+	   //redjanje.sort();
+    //document.getElementById("sort").innerHTML = redjanje;
+        //   });
+				
+	  // See Parsing the Results for
+	  // the basics of a callback function.
 	}
 
 
@@ -281,6 +317,10 @@
             handleLocationError(true, infoWindow, map.getCenter());
           });
         } 
+        //var pyrmont = {lat: -33.866, lng: 151.196};
+
+        
+
         
       }
 		
