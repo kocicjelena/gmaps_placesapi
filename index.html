@@ -231,7 +231,7 @@ var brr=1;
 				 
 				  reda.sort();
 					//red.sort();
-					   if (ff<11&&(red[j])&&(red[j].slice(0, red.length -2)!="")&&red[j]!=red[(j-1)]&&red[j]!=red[-1]&&red[j]!=red[-2]){
+					   if (ff<11&&(red[j])&&(red[j].slice(0, red.length -2)!="")&&red[j]!=red[(j-1)]&&red[j]!=red[(j-2)]&&red[j]!=red[(j-3)]&&red[j]!=red[-1]&&red[j]!=red[-2]){
 				 placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+red[j]+'km   '+'<img width="100" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=100x100&maptype=roadmap&format=jpg&visual_refresh=true" alt="Google Map of Belgrade, Serbia">' +'</li>';
 				ff+=1;
 				
