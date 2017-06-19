@@ -125,6 +125,7 @@
 
       var map, infoWindow;
        var service;
+	     var ff =1;
       function initMap() {
 	  infoWindow = new google.maps.InfoWindow;
 		if (navigator.geolocation) {
@@ -205,9 +206,7 @@
 				  avoidHighways: false,
 				  avoidTolls: false
 		  }, callback);
-var ff=1;
-var br=1;
-var brr=1;
+
 		function callback(response, status) {
 		console.log(response, status);
 		
@@ -229,32 +228,35 @@ var brr=1;
 				//re = re.slice(0,11);
 				  //var red = redjanje.slice(1, 11);
 					 // redjanje.push(re.slice(0, re.length-2));
-				 redjanje.push(re.slice(0, re.length-2));
-				  redjanje.sort();
-					  //redjanje.push(re);
+				  //redjanje.push(re);
 				var red = redjanje.slice(1, 11);
-				  
-				  var red = redjanje.slice(1, 11);
-					red.sort();
+				red.sort();
+				red.slice(0,10);
 					  //red.slice(1,11);
 					//reds.push(results[j].distance.text);
 					//reda.push(places[j].name);
 				 //if (results[j].distance.text != results[k].distance.text) 
 				// reds.sort().slice(0,11);
-				 
-				 // reda.sort();
+				console.log(response.destinationAddresses[0].toString());
+					 redjanje.sort();
+				   reda.push(response.destinationAddresses[0].toString());
+				  reda.sort();
+					  reda.slice(0,10);
 					//red.sort();
-					   if (ff<11&&(red[j])&&(red[j].slice(0, red.length -2)!="")&&red[j]!=red[(j-1)]&&red[j]!=red[(j-2)]&&red[j]!=red[(j-3)]&&red[j]!=red[(j-4)]&&red[j]!=red[-1]&&red[j]!=red[-2]){
-				 //placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+', distance in km:   '+re[ff][1].distance.text+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center="'+response.destinationAddresses[0]+'"&zoom=14&size=400x400&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="Google Map of Belgrade, Serbia">' +'</li>';
-				placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+', distance:   '+red[j]+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center="'+response.destinationAddresses[0]+'"&zoom=14&size=400x400&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="Google Map of Belgrade, Serbia">' +'</li>';
+				  
+				 
+					   if (ff<11&&(red[ff])&&(red[ff].slice(0, red.length -2)!="")
+					   &&(red[ff].slice(0, red.length -2)!==red[(ff-1)].slice(0, red.length -2))){
+					       //placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+', distance in km:   '+re[ff][1].distance.text+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center="'+response.destinationAddresses[0]+'"&zoom=14&size=400x400&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="Google Map of Belgrade, Serbia">' +'</li>';
+				placesList.innerHTML += '<li>'+ff+'.  ' +places[ff].name+', distance:   '+red[j]+'<img width="100" src="https://maps.googleapis.com/maps/api/staticmap?center="'+reda[0]+'"&zoom=14&size=100x100&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="Google Map of Belgrade, Serbia">' +'</li>';
 				
-						   ff+=1;
+						   ff=1+ff;
 				
 				}else{return;}
-			  }
+			 }
+		
 				 //if (results[j].distance.text != results[k].distance.text) 
-				 redjanje.push(re.slice(0, re.length-2));
-				  redjanje.sort();
+				 //redjanje.push(re.slice(0, re.length-2));
 				  
 					//var udal = results[j].distance.value;
 					//udal.slice(0, udal.length -2);
