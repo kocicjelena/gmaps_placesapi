@@ -161,11 +161,11 @@
           }
         }
       }
- var redjanje = new Array();
- var red = new Array();
-		   var reda = new Array();
+	 var redjanje = new Array();
+	 var red = new Array();
+	 var re = new Array();
+		  var reda = new Array();
 		  var reds = new Array();
-		  var re = new Array();
 	  function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
         var placesList = document.getElementById('places');
@@ -205,36 +205,40 @@
 				  avoidHighways: false,
 				  avoidTolls: false
 		  }, callback);
-		var ff=1;
+var ff=1;
+var br=1;
+var brr=1;
 		function callback(response, status) {
 		console.log(response, status);
 		
 		var originList = response.originAddresses;
-			var destinationList = response.destinationAddresses;
-			var k = 0;
+	var destinationList = response.destinationAddresses;
+	var k = 0;
 			  for (var k = 0; k < destinationList.length; k++) {
 				  var results = response.rows[k].elements;
 				  for (var j = 0; j < results.length; j++) {
 				  re.push(results.sort(function(a, b){
     					return a.distance.value-b.distance.value
-					}));
-					re = re.slice(0,10);
-				  var red = redjanje.slice(1, 11);
-					  redjanje.push(re.slice(0, re.length-2));
-				  redjanje.sort();
+				}));
+				re = re.slice(0,11);
+				  //var red = redjanje.slice(1, 11);
+					 // redjanje.push(re.slice(0, re.length-2));
+				  redjanje.push(re));
+					  redjanje.sort();
 				  
-				 // var red = redjanje.slice(1, 11);
+				  var red = redjanje.slice(1, 11);
 					red.sort();
+					  //red.slice(1,11);
 					//reds.push(results[j].distance.text);
 					//reda.push(places[j].name);
 				 //if (results[j].distance.text != results[k].distance.text) 
-				// reds.sort().slice(0,10);
+				// reds.sort().slice(0,11);
 				 
 				 // reda.sort();
 					//red.sort();
-					   if (ff<11&&(red[ff])&&(red[ff].slice(0, red.length -2)!="")&&red[j]!=red[j-1]){
-				// placesList.innerHTML += '<li>'+ff +'.   '+places[j].name+',distance:'++re[ff][0].distance.text+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center="'+response.destinationAddresses[0]+'"&zoom=14&size=400x400&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="Google Map of Belgrade, Serbia">' +'</li>';
-				placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+', distance in km:   '+red[j]+'km   '+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center="'+response.destinationAddresses[0]+'"&zoom=14&size=400x400&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="Google Map of Belgrade, Serbia">' +'</li>';
+					   if (ff<11&&(red[j])&&(red[j].slice(0, red.length -2)!="")&&red[j]!=red[(j-1)]&&red[j]!=red[(j-2)]&&red[j]!=red[(j-3)]&&red[j]!=red[-1]&&red[j]!=red[-2]){
+				 //placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+', distance in km:   '+re[ff][1].distance.text+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center="'+response.destinationAddresses[0]+'"&zoom=14&size=400x400&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="Google Map of Belgrade, Serbia">' +'</li>';
+				placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+', distance:   '+red[j]+'<img width="200" src="https://maps.googleapis.com/maps/api/staticmap?center="'+response.destinationAddresses[0]+'"&zoom=14&size=400x400&key=AIzaSyCQ4SMbmgUw_moM37nVnAFQmzUdTv5jRnU" alt="Google Map of Belgrade, Serbia">' +'</li>';
 				
 						   ff+=1;
 				
