@@ -216,6 +216,13 @@ var brr=1;
 	var k = 0;
 			  for (var k = 0; k < destinationList.length; k++) {
 				  var results = response.rows[k].elements;
+				  for (var j = 0; j < results.length; j++) {
+				  //console.log(results[j].distance.text);
+				 var re = results[j].distance.text;
+				 
+				  /////console.log(re.slice(0, re.length-2));
+				  //redjanje.push(results[j].distance.text);
+				  redjanje.push(re.slice(0, re.length-2));
 				 // re.push(results.sort(function(a, b){
     				//	return a.distance.value-b.distance.value
 				//}));
