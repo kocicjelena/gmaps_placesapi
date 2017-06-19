@@ -217,13 +217,13 @@ var brr=1;
 				  var results = response.rows[k].elements;
 				  for (var j = 0; j < results.length; j++) {
 				  var re = results[j].distance.text;
-				  var red = redjanje.slice(1, 11);
+				  //var red = redjanje.slice(1, 11);
 					  redjanje.push(re.slice(0, re.length-2));
 				  redjanje.sort();
 				  
 				  var red = redjanje.slice(1, 11);
 					red.sort();
-					  red.slice(1,11);
+					  //red.slice(1,11);
 					reds.push(results[j].distance.text);
 					reda.push(places[j].name);
 				 //if (results[j].distance.text != results[k].distance.text) 
@@ -232,7 +232,7 @@ var brr=1;
 				  reda.sort();
 					//red.sort();
 					   if (ff<11&&(red[j])&&(red[j].slice(0, red.length -2)!="")&&red[j]!=red[(j-1)]){
-				 placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+'<img width="100" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=100x100&maptype=roadmap&format=jpg&visual_refresh=true" alt="Google Map of Belgrade, Serbia">' + red[j] +'km'+'</li>';
+				 placesList.innerHTML += '<li>'+ff+'.  ' +places[j].name+red[j]+'km   '+'<img width="100" src="https://maps.googleapis.com/maps/api/staticmap?center=Belgrade,+Serbia&zoom=13&scale=1&size=100x100&maptype=roadmap&format=jpg&visual_refresh=true" alt="Google Map of Belgrade, Serbia">' +'</li>';
 				ff+=1;
 				
 				}else{return;}
