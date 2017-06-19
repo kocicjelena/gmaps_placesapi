@@ -217,6 +217,7 @@ var brr=1;
 			  for (var k = 0; k < destinationList.length; k++) {
 				  var results = response.rows[k].elements;
 				  for (var j = 0; j < results.length; j++) {
+					  var re = results[j].distance.text;
 				 // re.push(results.sort(function(a, b){
     				//return a.distance.value-b.distance.value
 				//}));
