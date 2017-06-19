@@ -217,16 +217,16 @@ var brr=1;
 			  for (var k = 0; k < destinationList.length; k++) {
 				  var results = response.rows[k].elements;
 				  for (var j = 0; j < results.length; j++) {
-				  re.push(results.sort(function(a, b){
-    					return a.distance.value-b.distance.value
-				}));
-				re = re.slice(0,11);
+				 // re.push(results.sort(function(a, b){
+    				//	return a.distance.value-b.distance.value
+				//}));
+				//re = re.slice(0,11);
 				  //var red = redjanje.slice(1, 11);
 					 // redjanje.push(re.slice(0, re.length-2));
-				  redjanje.push(re);
-					  redjanje.sort();
-				  
-				  var red = redjanje.slice(1, 11);
+				 redjanje.push(re.slice(0, re.length-2));
+				  redjanje.sort();
+					  //redjanje.push(re);
+				var red = redjanje.slice(1, 11);
 					red.sort();
 					  //red.slice(1,11);
 					//reds.push(results[j].distance.text);
